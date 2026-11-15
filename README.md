@@ -16,7 +16,8 @@ not against the inflated peak.
 ## What it does
 
 - Tracks a product across one or more offers (sites).
-- Keeps a price history in SQLite.
+- Keeps a price history in local SQLite by default, with pluggable support for
+  external databases (PostgreSQL, MySQL, SQL Server) via `DB_URL` (see `docs/DATABASE.md`).
 - `assess_discount` / the `desconto_real` MCP tool classify the current price as a real
   discount, a suspicious (fake) one, or no discount.
 - Exposes tools over MCP: `desconto_real`, `historico_preco` (more coming:
@@ -47,4 +48,4 @@ python scripts/check_no_emoji.py
 - Charts of price history through askdash.
 - Alerts and capture through Nextor; cards and control through NexHub.
 
-See `docs/ARCHITECTURE.md`. Portuguese readme: `README.pt-BR.md`. License: MIT.
+See `docs/ARCHITECTURE.md` and `docs/DATABASE.md`. Portuguese readme: `README.pt-BR.md`. License: MIT.
