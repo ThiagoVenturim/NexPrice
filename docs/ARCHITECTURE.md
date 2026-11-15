@@ -17,10 +17,14 @@ patterns (and, later, `faccoder-core` for model-backed features).
   without the optional `mcp` package so the core is usable directly.
 - `cli.py`: small offline CLI (`nexprice assess`).
 
-## Data model (SQLite)
+## Data model and pluggable storage
 - `products(id, title, category, notes)`
 - `offers(product_id, site, url, currency)` PK (product_id, site)
 - `observations(product_id, site, price, at, available)` PK (product_id, site, at)
+
+The storage layer defaults to zero-config SQLite (`nexprice.db`) and supports any external
+database URL via `DB_URL` (PostgreSQL, MySQL, SQL Server/ODBC). Parameterized SQL only.
+See `docs/DATABASE.md` for connection strings and driver extras.
 
 ## The fake-discount rule
 Given the history within `window_days`, split into a baseline (older than `spike_days`)

@@ -12,7 +12,9 @@ from nexprice.analysis import assess_discount
 from nexprice.storage import Store
 
 
-def desconto_real(db_path: str, product_id: str, site: str | None = None) -> dict:
+def desconto_real(
+    db_path: str | None = None, product_id: str = "", site: str | None = None
+) -> dict:
     """Return whether the current price is a real discount or a suspicious one."""
     store = Store(db_path)
     try:
@@ -33,7 +35,9 @@ def desconto_real(db_path: str, product_id: str, site: str | None = None) -> dic
         store.close()
 
 
-def historico_preco(db_path: str, product_id: str, site: str | None = None) -> list[dict]:
+def historico_preco(
+    db_path: str | None = None, product_id: str = "", site: str | None = None
+) -> list[dict]:
     """Return the recorded price history for a product."""
     store = Store(db_path)
     try:

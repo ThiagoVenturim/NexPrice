@@ -16,7 +16,8 @@ inflado.
 ## O que faz
 
 - Acompanha um produto em uma ou mais ofertas (sites).
-- Guarda o historico de precos em SQLite.
+- Guarda o historico de precos em SQLite por padrao, com suporte plugavel para
+  banco proprio (PostgreSQL, MySQL, SQL Server) via `DB_URL` (ver `docs/DATABASE.md`).
 - `assess_discount` / a ferramenta MCP `desconto_real` classificam o preco atual como
   desconto real, suspeito (falso) ou sem desconto.
 - Expoe ferramentas por MCP: `desconto_real`, `historico_preco` (em breve: `buscar_item`,
@@ -47,4 +48,4 @@ python scripts/check_no_emoji.py
 - Graficos de historico pelo askdash.
 - Alertas e captura pelo Nextor; cartoes e controle pelo NexHub.
 
-Ver `docs/ARCHITECTURE.md`. Licenca: MIT.
+Ver `docs/ARCHITECTURE.md` e `docs/DATABASE.md`. Licenca: MIT.

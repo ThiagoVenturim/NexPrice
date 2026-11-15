@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexprice
+  labels:
+    app.kubernetes.io/name: nexprice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nexprice
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nexprice
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+        - name: nexprice
+          image: ghcr.io/thiagoventurim/nexprice:latest
+          imagePullPolicy: IfNotPresent
+          args: ["--help"]
+          envFrom:
+            - configMapRef:
+                name: nexprice-config
+            - secretRef:
+                name: nexprice-secret
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          emptyDir: {}
