@@ -18,15 +18,19 @@ def main(argv: list[str] | None = None) -> int:
     p_assess = sub.add_parser(
         "assess", help="Assess a product's current price against its history."
     )
-    p_assess.add_argument("--db", required=True)
+    p_assess.add_argument(
+        "--db",
+        default=None,
+        help="Database path or SQLAlchemy URL (defaults to DB_URL or local SQLite).",
+    )
     p_assess.add_argument("--product", required=True)
     p_assess.add_argument("--site", default=None)
 
     args = parser.parse_args(argv)
 
     if args.cmd == "assess":
-        store = Store(args.db)
-        hist = store.history(args.product, args.site)
+        with Store(args.db) as store:
+            hist = store.history(args.product, args.site)
         if not hist:
             print("sem historico para esse produto")
             return 4
